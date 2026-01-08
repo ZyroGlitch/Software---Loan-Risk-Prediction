@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Risk Prediction - How It Works</title>
+    <!-- <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/features.css" /> -->
+
+    <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/features.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <main class="features-main">
+      <div class="features-container">
+        <!-- Header Section -->
+        <div class="features-header">
+          <h1 class="features-title">
+            Powerfuk Features for <span class="highlight">Smart Lending</span>
+          </h1>
+          <p class="features-subtitle">
+            Our ML-driven platform provides comprehensive tools to revolutionize
+            your loan risk assessment process
+          </p>
+        </div>
+      </div>
+      <!-- Content Section -->
+      <div class="features-grid">
+        <!-- Feature 1: ML-Powered Risk Assessment -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="brain" style="color: #0015ff"></i>
+            <div class="feature-badge">
+              <p>Core Feature</p>
+            </div>
+          </div>
+          <h1>ML-Powered Risk Assessment</h1>
+          <p>
+            Advanced machine learning models analyze hundreds of data points to
+            predict loan risk probability.
+          </p>
+        </div>
+
+        <!-- Feature 2: Real-Time Data Processing -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="zap" style="color: #ffdd00"></i>
+            <div class="feature-badge">
+              <p>Core Feature</p>
+            </div>
+          </div>
+          <h1>Real-Time Data Processing</h1>
+          <p>
+            Get instant risk assessments, enabling faster loan approval
+            decisions.
+          </p>
+        </div>
+
+        <!-- Feature 3: Comprehensive Data Analysis -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="chart-column-increasing" style="color: #00ff00"></i>
+            <div class="feature-badge">
+              <p>Core Feature</p>
+            </div>
+          </div>
+          <h1>Comprehensive Data Analysis</h1>
+          <p>
+            Analyze demographic information, financial information patterns,
+            current and previous campaign data.
+          </p>
+        </div>
+
+        <!-- Feature 4: Fraud Detection & Security -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="shield-check" style="color: #ff4d4d"></i>
+            <div class="feature-badge">
+              <p>Core Feature</p>
+            </div>
+          </div>
+          <h1>Fraud Detection & Security</h1>
+          <p>
+            Detect suspicious patterns and anomalies in loan applications to
+            prevent fraud and ensure data security.
+          </p>
+        </div>
+
+        <!-- Feature 5: Scalable Data Integration -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="database" style="color: #8a2be2"></i>
+            <div class="feature-badge">
+              <p>Core Feature</p>
+            </div>
+          </div>
+          <h1>Scalable Data Integration</h1>
+          <p>
+            Seamlessly integrate with multiple data sources including banking
+            records.
+          </p>
+        </div>
+
+        <!-- Feature 6: Predictive Insights Dashboard -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="trending-up" style="color: #0099ff"></i>
+            <div class="feature-badge">
+              <p>Core Feature</p>
+            </div>
+          </div>
+          <h1>Predictive Insights</h1>
+          <p>
+            Interactive result section provide lenders with predictive analytics
+            and trends for smarter decision-making.
+          </p>
+        </div>
+      </div>
+    </main>
+  </body>
+  <!-- <script src="../js/navbar.js"></script> -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</html>

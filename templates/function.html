@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Risk Prediction - functions</title>
+
+    <!-- <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/function.css" /> -->
+
+    <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/function.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <main>
+      <div class="function-container">
+        <h1 class="function-title">
+          How Our <span class="highlight">Model</span> Works
+        </h1>
+        <p class="function-subtitle">
+          Discover the four-step process that transforms raw data into
+          intelligent lending decisions
+        </p>
+        <div class="steps-grid" id="stepsGrid"></div>
+      </div>
+      <div class="function-card">
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">01</div>
+            <i data-lucide="database" class="step-icon"></i>
+            <h2 class="step-title">Data Collection</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Collect reliable, relevant, and compliant data to evaluate an
+              applicant’s creditworthiness and risk profile.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Applicant Profile Data</p>
+                <p class="component-item">&bull; Financial Information</p>
+                <p class="component-item">&bull; Credit History</p>
+                <p class="component-item">
+                  &bull; Behavioral & Transactional Data
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">02</div>
+            <i data-lucide="shredder" class="step-icon"></i>
+            <h2 class="step-title">Data Preprocessing</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Prepare raw applicant data for analysis and modeling by cleaning,
+              transforming, and standardizing it to ensure accuracy,
+              consistency, and reliability.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Data Cleaning</p>
+                <p class="component-item">
+                  &bull; Data Formatting and standardization
+                </p>
+                <p class="component-item">&bull; Categorical Data Encoding</p>
+                <p class="component-item">&bull; Outlier Handling</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">03</div>
+            <i data-lucide="search-alert" class="step-icon"></i>
+            <h2 class="step-title">Exploratory Data Analysis</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Analyze and understand applicant data to identify patterns,
+              relationships, anomalies, and key risk indicators before feature
+              engineering and model training.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Data Overview</p>
+                <p class="component-item">&bull; Missing Value Analysis</p>
+                <p class="component-item">&bull; Distribution Analysis</p>
+                <p class="component-item">
+                  &bull; Correlation & Relationship Analysis
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">04</div>
+            <i data-lucide="hard-hat" class="step-icon"></i>
+            <h2 class="step-title">Feature Engineering</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Transform processed data into meaningful, predictive features that
+              capture financial behavior and improve risk prediction accuracy.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Feature Selection</p>
+                <p class="component-item">&bull; Feature Creation</p>
+                <p class="component-item">&bull; Feature Transformation</p>
+                <p class="component-item">&bull; Feature Validation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">05</div>
+            <i data-lucide="cpu" class="step-icon"></i>
+            <h2 class="step-title">Model Training</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Train machine learning models using engineered features to learn
+              patterns that distinguish low-risk and high-risk applicants.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">
+                  &bull; Algorithm Selection: Random Forest with XGBoost
+                </p>
+                <p class="component-item">&bull; Data Splitting</p>
+                <p class="component-item">&bull; Model Fitting</p>
+                <p class="component-item">
+                  &bull; Hyperparameter Tuning: Grid Search
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">06</div>
+            <i data-lucide="brain" class="step-icon"></i>
+            <h2 class="step-title">Model Evaluation</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Assess the trained model’s performance, reliability, and fairness
+              to ensure accurate and responsible risk predictions.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Performance Metrics</p>
+                <p class="component-item">&bull; Validation on Unseen Data</p>
+                <p class="component-item">&bull; Error Analysis</p>
+                <p class="component-item">&bull; Threshold Optimization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">07</div>
+            <i data-lucide="shapes" class="step-icon"></i>
+            <h2 class="step-title">Risk Scoring & Classification</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Convert model predictions into interpretable risk scores and
+              categories to support consistent, data-driven lending decisions.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Risk Score Generation</p>
+                <p class="component-item">&bull; Risk Classification</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-number">08</div>
+            <i data-lucide="scale" class="step-icon"></i>
+            <h2 class="step-title">Decision & Recommendation</h2>
+          </div>
+          <div class="step-content">
+            <p class="step-description">
+              Translate risk assessments and model outputs into actionable
+              lending decisions and recommendations for consistent, informed,
+              and transparent outcomes.
+            </p>
+            <div class="step-components">
+              <h3 class="components-title">Key Components:</h3>
+              <div class="components-grid">
+                <p class="component-item">&bull; Decision Making</p>
+                <p class="component-item">
+                  &bull; Explainability & Justification
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <!-- <script src="../js/navbar.js"></script> -->
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</html>

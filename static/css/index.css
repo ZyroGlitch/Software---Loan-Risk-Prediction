@@ -1,0 +1,114 @@
+body {
+  padding: 15px;
+  padding-top: 5px;
+  font-family: "Roboto Mono", monospace;
+  background: linear-gradient(
+    135deg,
+    oklch(0.12 0.05 240) 0%,
+    oklch(0.15 0.08 260) 50%,
+    oklch(0.18 0.06 280) 100%
+  );
+  background-attachment: fixed;
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+  text-underline: none;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  transition: filter 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-logo:hover {
+  filter: brightness(1.2);
+  text-shadow: 0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 30px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.4);
+}
+.nav-logo-icon {
+  font-size: 24px;
+  background-color: #a855f7;
+  color: white;
+  border-radius: 25%;
+  padding: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-logo:hover .nav-logo-icon {
+  transform: rotate(15deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.6);
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.nav-item {
+  position: relative;
+  display: inline-block;
+  color: white;
+  font-size: 17px;
+}
+
+.nav-link {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  color: white;
+  transition: text-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.8),
+    0 0 25px rgba(168, 85, 247, 0.6), 0 0 35px rgba(168, 85, 247, 0.4);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  height: 2px;
+  width: 0;
+  background-color: #a855f7;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link-icon {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 20px;
+  background-color: #8a0ffcff;
+  padding: 8px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+.nav-link-icon:hover {
+  background-color: #720ed0ff;
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.6),
+    0 0 40px rgba(168, 85, 247, 0.4);
+  transform: translateY(-2px) scale(1.05);
+}

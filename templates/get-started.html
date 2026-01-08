@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/get-started.css" /> -->
+
+        <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/get-started.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <main>
+      <div class="content-header">
+        <h1 class="content-title">
+          <span class="highlight">Loan</span> Risk Assessment
+        </h1>
+        <p class="content-subtitle">
+          Ready to revolutionize your lending process? Contact us to learn more
+          about our ML-powered risk assessment platform.
+        </p>
+      </div>
+      <div class="get-started-content">
+        <!-- Form Section -->
+        <div class="get-started-left"> 
+          <form action="" class="get-started-left-form" id="form">
+            <div class="get-started-left-card">
+              <!-- Personal Information -->
+              <div>
+                 <h1 class="get-started-left-title">Personal Information</h1>
+                <div class="form-content">
+                  <div class="form-group">
+                    <label for="age" class="form-label">Age </label>
+                    <input type="number" id="age" class="form-input" />
+                  </div>
+                  <div class="form-group">
+                    <label for="marital" class="form-label">Marital Status</label>
+                    <select id="marital" class="form-input form-select"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="education" class="form-label">Highest Educational Attainment</label>
+                    <select id="education" class="form-input form-select"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="job" class="form-label">Job</label>
+                    <select id="job" class="form-input form-select"></select>
+                  </div>
+                </div>
+              </div>
+              <!-- Contact Information -->
+              <div>
+                <h1 class="get-started-left-title">Contact Information</h1>       
+                  <div class="form-content"> 
+                    <div class="form-group">
+                      <label for="phone" class="form-label">Phone Type</label>
+                      <select id="phone" class="form-input form-select"></select>
+                    </div>
+                  </div>
+              </div>
+              <!-- Financial Information -->
+              <div>
+                <h1 class="get-started-left-title">Financial Information</h1>   
+                <div class="form-content">
+                  <div class="form-group">
+                    <label for="balance" class="form-label">Balance</label>
+                    <input type="number" id="balance" class="form-input" />
+                  </div>
+                  <div class="form-group">
+                    <label for="housing" class="form-label">Housing</label>
+                    <select id="housing"class="form-input form-select"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="default" class="form-label">Default</label>
+                    <select id="default" class="form-input form-select"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="loan" class="form-label">Loan</label>
+                    <select id="loan" class="form-input form-select"></select>
+                  </div>
+                </div>
+              </div>
+              <!-- Campaign Information -->
+              <div>
+                <h1 class="get-started-left-title">Campaign Information</h1>
+                <div class="form-content">
+                  <div class="form-group">
+                    <label for="day" class="form-label">Day</label>
+                    <select id="day" class="form-input form-select"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="duration" class="form-label">Duration</label>
+                    <input type="number" id="duration" class="form-input" />
+                  </div>
+                   <div class="form-group">
+                    <label for="month" class="form-label">Month</label>
+                    <select id="month" class="form-input form-select"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="campaign" class="form-label">Campaign</label>
+                    <input type="number" id="campaign" class="form-input" />
+                  </div>
+                </div>
+              </div>
+             <div>
+                <h1 class="get-started-left-title">Previous Campaign Information</h1>
+                <div class="form-content">
+                  <div class="form-group">
+                    <label for="pdays" class="form-label">Days Since Contact</label>
+                    <input type="number" id="pdays" class="form-input" />
+                  </div>
+                  <div class="form-group">
+                    <label for="previous" class="form-label">Previous Contacts</label>
+                    <input type="number" id="previous" class="form-input" />
+                  </div>
+                  <div class="form-group">
+                    <label for="previous-outcome" class="form-label">Previous Outcome</label>
+                    <select id="previous-outcome"class="form-input form-select"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn-submit" type="submit">
+                Process Information
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Result Grids -->
+        <div class="get-started-right">
+          <!-- Baseline Model -->
+          <div class="result-card">
+            <h2 class="get-started-right-title">Result for Random Forest Model</h2>
+            <div class="result-header">
+              <h3 class="result-status" id="baseline-status">None</h3>
+              <p class="result-status-label">LOAN STATUS</p>
+            </div>
+            <div class="result-performance">
+              <h2 class="result-risk-score" id="baseline-risk">0%</h2>
+              <p class="result-risk-label">RISK PERCENTAGE</p>
+            </div>
+            <div class="result-metrics">
+              <div class="metric-card metric-blue">
+                <h4 class="metric-value" id="baseline-accuracy">0%</h4>
+                <p class="metric-label">Model Accuracy</p>
+              </div>
+              <div class="metric-card metric-green">
+                <h4 class="metric-value" id="baseline-confidence">0%</h4>
+                <p class="metric-label">Confidence Score</p>
+                <!-- <h4 class="metric-value">90.32%</h4> -->
+                <!-- <p class="metric-label">ROC-AUC</p> -->
+              </div>
+              <div class="metric-card metric-yellow">
+                <h4 class="metric-value">1430 | 332</h4>
+                <p class="metric-label">True Negative | False Positive </p>
+              </div>
+              <div class="metric-card metric-red">
+                <h4 class="metric-value">201 | 1386</h4>
+                <p class="metric-label">False Negative | True Positive</p>
+              </div>
+            </div>
+            <div class="result-indicators">
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="84.36" style="--percentage: 84.36">
+                  <span class="indicator-value">84.36%</span>
+                </div>
+                <p class="indicator-label">Precision</p>
+              </div>
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="84.08" style="--percentage: 84.08">
+                  <span class="indicator-value">84.08%</span>
+                </div>
+                <p class="indicator-label">Recall (Weighted Avg.)</p>
+              </div>
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="84.09" style="--percentage: 84.09">
+                  <span class="indicator-value">84.09%</span>
+                </div>
+                <p class="indicator-label">F1 Score (Weighted Avg.)</p>
+              </div>
+              <!-- <div class="indicator">
+                <div class="indicator-chart" data-percentage="82" style="--percentage: 82">
+                  <span class="indicator-value">82%</span>
+                </div>
+                <p class="indicator-label">Support (Weighted Avg.)</p>
+              </div>
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="76" style="--percentage: 76">
+                  <span class="indicator-value">76%</span>
+                </div>
+                <p class="indicator-label">Adaptability</p>
+              </div> -->
+            </div>
+          </div>
+     <!-- Optimized Model -->
+          <div class="result-card">
+            <h2 class="get-started-right-title">Result for Optimized Random Forest with XGBoost</h2>
+            <div class="result-header">
+              <h3 class="result-status" id="enhanced-status">None</h3>
+              <p class="result-status-label">LOAN STATUS</p>
+            </div>
+            <div class="result-performance">
+              <h2 class="result-risk-score" id="enhanced-risk">0%</h2>
+              <p class="result-risk-label">RISK PERCENTAGE</p>
+            </div>
+             <div class="result-metrics">
+              <div class="metric-card metric-blue">
+                <h4 class="metric-value" id="enhanced-accuracy">0%</h4>
+                <p class="metric-label">Model Accuracy</p>
+              </div>
+              <div class="metric-card metric-green">
+                <h4 class="metric-value" id="enhanced-confidence">0%</h4>
+                <p class="metric-label">Confidence Score</p>
+                <!-- <h4 class="metric-value">91.65%</h4>
+                <p class="metric-label">ROC-AUC</p> -->
+              </div>
+              <div class="metric-card metric-yellow">
+                <h4 class="metric-value">1439 | 323</h4>
+                <p class="metric-label">True Negative | False Positive </p>
+              </div>
+              <div class="metric-card metric-red">
+                <h4 class="metric-value">170 | 1417</h4>
+                <p class="metric-label">False Negative | True Positive</p>
+              </div>
+            </div>
+            <div class="result-indicators">
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="85.64" style="--percentage: 85.64">
+                  <span class="indicator-value">85.64%</span>
+                </div>
+                <p class="indicator-label">Precision</p>
+              </div>
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="85.28" style="--percentage: 85.28">
+                  <span class="indicator-value">85.28%</span>
+                </div>
+                <p class="indicator-label">Recall (Weighted Avg.)</p>
+              </div>
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="85.28" style="--percentage: 85.28">
+                  <span class="indicator-value">85.28%</span>
+                </div>
+                <p class="indicator-label">F1 Score (Weighted Avg.)</p>
+              </div>
+              <!-- <div class="indicator">
+                <div class="indicator-chart" data-percentage="82" style="--percentage: 82">
+                  <span class="indicator-value">82%</span>
+                </div>
+                <p class="indicator-label">Support (Weighted Avg.)</p>
+              </div>
+              <div class="indicator">
+                <div class="indicator-chart" data-percentage="76" style="--percentage: 76">
+                  <span class="indicator-value">76%</span>
+                </div>
+                <p class="indicator-label">Adaptability</p>
+              </div> -->
+            </div>          
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <!-- <script src="../js/navbar.js"></script>
+  <script type="module" src="../js/get-started.js"></script>
+  <script type="module" src="../js/handler/get-started-submit.js"></script> -->
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/get-started.js') }}"></script>
+  <script type="module" src="{{ url_for('static', filename='js/handler/get-started-submit.js') }}"></script>
+</html>

@@ -1,0 +1,208 @@
+.home-main {
+  display: flex;
+  align-items: center;
+}
+
+.home-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.home-left {
+  padding: 96px 40px;
+}
+
+.home-title {
+  font-size: 3.05rem;
+  color: white;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.home-title .highlight {
+  color: #643b9a;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+.btn {
+  width: 200px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background-color: #643b9a;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #7c4cb8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 59, 154, 0.4);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border: 2px solid #643b9a;
+}
+
+.btn-secondary:hover {
+  background-color: #643b9a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 59, 154, 0.4);
+}
+
+/* Right Section - Animation Container */
+.home-right {
+  padding: 40px;
+}
+
+.animation-container {
+  width: 100%;
+  padding: 24px;
+  background-color: rgba(217, 217, 217, 0.2);
+  border-radius: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-row.row-3 {
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.grid-box {
+  background-color: rgba(100, 59, 154, 0.2);
+  min-height: 70px;
+  border-radius: 8px;
+  border: 1px solid rgba(100, 59, 154, 0.3);
+}
+
+.grid-box.wide {
+  grid-column: span 1;
+}
+
+.grid-box.corner-tl {
+  border-top-left-radius: 16px;
+}
+
+.grid-box.corner-tr {
+  border-top-right-radius: 16px;
+}
+
+.grid-box.corner-bl {
+  border-bottom-left-radius: 16px;
+}
+
+.grid-box.corner-br {
+  border-bottom-right-radius: 16px;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+.delay-2 {
+  animation-delay: 0.4s;
+}
+
+.delay-3 {
+  animation-delay: 0.6s;
+}
+
+.delay-4 {
+  animation-delay: 0.8s;
+}
+
+.delay-5 {
+  animation-delay: 1s;
+}
+
+.delay-6 {
+  animation-delay: 1.2s;
+}
+
+.delay-7 {
+  animation-delay: 1.4s;
+}
+
+.delay-8 {
+  animation-delay: 1.6s;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .home-content {
+    grid-template-columns: 1fr;
+  }
+
+  .home-title {
+    font-size: 2.5rem;
+  }
+
+  .home-left {
+    padding: 60px 20px;
+  }
+
+  .home-right {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .home-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .grid-box {
+    min-height: 50px;
+  }
+}

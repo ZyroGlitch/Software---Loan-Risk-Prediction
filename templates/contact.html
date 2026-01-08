@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Risk Prediction - Contact</title>
+    <!-- <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/contact.css" /> -->
+
+    <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/contact.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <main>
+      <div class="contact-container">
+        <div class="contact-header">
+          <h1 class="contact-title">
+            Get in Touch with Our <span class="highlight">Team</span>
+          </h1>
+          <p class="contact-subtitle">
+            Ready to revolutionize your lending process? Contact us to learn
+            more about our AI-powered risk assessment platform.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-form-card">
+            <h2 class="card-title">Send us a Message</h2>
+            <form class="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstname" class="form-label">First name</label>
+                  <input type="text" id="firstname" class="form-input" />
+                </div>
+                <div class="form-group">
+                  <label for="lastname" class="form-label">Last name</label>
+                  <input type="text" id="lastname" class="form-input" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-input" />
+              </div>
+
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" class="form-input" />
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea
+                  id="message"
+                  class="form-textarea"
+                  rows="5"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="submit-button">Send message</button>
+            </form>
+          </div>
+
+          <div class="contact-info-container">
+            <div class="contact-info-card">
+              <h2 class="card-title">Contact Information</h2>
+
+              <div class="info-item">
+                <div class="icon-wrapper">
+                  <i data-lucide="mail" class="info-icon"></i>
+                </div>
+                <div>
+                  <h3 class="info-label">Email</h3>
+                  <p class="info-text">- j.buliag.530734@umindanao.edu.ph</p>
+                  <p class="info-text">
+                    - r.magallanes.539525@umindanao.edu.ph
+                  </p>
+                  <p class="info-text">- p.dujali.486996@umindanao.edu.ph</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="icon-wrapper">
+                  <i data-lucide="phone" class="info-icon"></i>
+                </div>
+                <div>
+                  <h3 class="info-label">Phone</h3>
+                  <p class="info-text">+63 912 345 6789</p>
+                  <p class="info-text">+63 923 456 7890</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="icon-wrapper">
+                  <i data-lucide="map-pin" class="info-icon"></i>
+                </div>
+                <div>
+                  <h3 class="info-label">Address</h3>
+                  <p class="info-text">
+                    - University of Mindanao Matina, Davao City, 8000
+                  </p>
+                  <p class="info-text">
+                    - University of Mindanao Matina, Davao City, 8000
+                  </p>
+                  <p class="info-text">
+                    - University of Mindanao Matina, Davao City, 8000
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <!-- <script src="../js/navbar.js"></script> -->
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</html>

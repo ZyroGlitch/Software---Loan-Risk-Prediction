@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Risk Prediction - Home</title>
+    <!-- <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="../css/home.css" /> -->
+
+    <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/home.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <main class="home-main">
+      <div class="home-content">
+        <div class="home-left">
+          <h1 class="home-title">
+            Optimizing Random Forest with
+            <span class="highlight">XGBoost</span>
+            for Loan Risk Prediction
+          </h1>
+          <div class="home-buttons">
+            <a href="get-started" class="btn-link">
+              <button class="btn btn-primary">Get Started</button>
+            </a>
+            <a href="/function" class="btn-link">
+              <button class="btn btn-secondary">Learn More</button>
+            </a>
+          </div>
+        </div>
+        <div class="home-right">
+          <div class="animation-container">
+            <div class="grid-row">
+              <div class="grid-box corner-tl pulse"></div>
+              <div class="grid-box corner-tr pulse"></div>
+            </div>
+            <div class="grid-row row-3">
+              <div class="grid-box pulse delay-1"></div>
+              <div class="grid-box wide pulse delay-2"></div>
+              <div class="grid-box pulse delay-3"></div>
+            </div>
+            <div class="grid-row">
+              <div class="grid-box pulse delay-4"></div>
+              <div class="grid-box pulse delay-5"></div>
+            </div>
+            <div class="grid-row row-3">
+              <div class="grid-box corner-bl pulse delay-6"></div>
+              <div class="grid-box wide pulse delay-7"></div>
+              <div class="grid-box corner-br pulse delay-8"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <!-- <script src="../js/navbar.js"></script> -->
+
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+</html>
