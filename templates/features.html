@@ -24,7 +24,7 @@
         <!-- Header Section -->
         <div class="features-header">
           <h1 class="features-title">
-            Powerfuk Features for <span class="highlight">Smart Lending</span>
+            Risk Factors for <span class="highlight">Risk Assessment </span>
           </h1>
           <p class="features-subtitle">
             Our ML-driven platform provides comprehensive tools to revolutionize
@@ -37,96 +37,374 @@
         <!-- Feature 1: ML-Powered Risk Assessment -->
         <div class="feature-card">
           <div class="feature-card-header">
-            <i data-lucide="brain" style="color: #0015ff"></i>
+            <i data-lucide="target" style="color: #ff0000"></i>
             <div class="feature-badge">
-              <p>Core Feature</p>
+              <p>Target Column</p>
             </div>
           </div>
-          <h1>ML-Powered Risk Assessment</h1>
-          <p>
-            Advanced machine learning models analyze hundreds of data points to
-            predict loan risk probability.
-          </p>
+          <h1>Deposit</h1>
+          <p>This is the final decision outcome.</p>
+          <ul>
+            <li>
+              <p>Yes - Approved / Accepted</p>
+            </li>
+            <li>
+              <p>No - Rejected</p>
+            </li>
+          </ul>
         </div>
 
         <!-- Feature 2: Real-Time Data Processing -->
         <div class="feature-card">
           <div class="feature-card-header">
-            <i data-lucide="zap" style="color: #ffdd00"></i>
+            <i data-lucide="circle-user" style="color: #0000ff"></i>
             <div class="feature-badge">
-              <p>Core Feature</p>
+              <p>Customer Profile Column</p>
             </div>
           </div>
-          <h1>Real-Time Data Processing</h1>
-          <p>
-            Get instant risk assessments, enabling faster loan approval
-            decisions.
-          </p>
+          <h1>Age</h1>
+          <p>Get instant risk assessments, enabling faster loan approval</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Middle age (25 -40)</span>
+              <span>- Stable income and responsibilities</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Very young (unstable income)</span>
+              <span>- Very old (retirement, fixed income)</span>
+            </li>
+          </ul>
         </div>
 
         <!-- Feature 3: Comprehensive Data Analysis -->
         <div class="feature-card">
           <div class="feature-card-header">
-            <i data-lucide="chart-column-increasing" style="color: #00ff00"></i>
+            <i data-lucide="circle-user" style="color: #0000ff"></i>
             <div class="feature-badge">
-              <p>Core Feature</p>
+              <p>Customer Profile Column</p>
             </div>
           </div>
-          <h1>Comprehensive Data Analysis</h1>
-          <p>
-            Analyze demographic information, financial information patterns,
-            current and previous campaign data.
-          </p>
+          <h1>Job</h1>
+          <p>Job type indicates income reliability</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Management</span>
+              <span>- Admin</span>
+              <span>- Etc.</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Unemployed</span>
+              <span>- Student</span>
+              <span>- Unknown</span>
+            </li>
+          </ul>
         </div>
 
-        <!-- Feature 4: Fraud Detection & Security -->
+        <!-- Feature 4: Marital Status -->
         <div class="feature-card">
           <div class="feature-card-header">
-            <i data-lucide="shield-check" style="color: #ff4d4d"></i>
+            <i data-lucide="circle-user" style="color: #0000ff"></i>
             <div class="feature-badge">
-              <p>Core Feature</p>
+              <p>Customer Profile Column</p>
             </div>
           </div>
-          <h1>Fraud Detection & Security</h1>
-          <p>
-            Detect suspicious patterns and anomalies in loan applications to
-            prevent fraud and ensure data security.
-          </p>
+          <h1>Marital</h1>
+          <p>Household stability affects repayment behavior.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Married (shared financial responsibility)</span>
+            </li>
+            <li>
+              <p><span class="medium-risk-badge"></span>Medium Risk</p>
+              <span>- Unemployed</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Divorced (possible financial stress)</span>
+            </li>
+          </ul>
         </div>
 
         <!-- Feature 5: Scalable Data Integration -->
         <div class="feature-card">
           <div class="feature-card-header">
-            <i data-lucide="database" style="color: #8a2be2"></i>
+            <i data-lucide="dollar-sign" style="color: #ff7700"></i>
             <div class="feature-badge">
-              <p>Core Feature</p>
+              <p>Financial Risk Indicators</p>
             </div>
           </div>
-          <h1>Scalable Data Integration</h1>
-          <p>
-            Seamlessly integrate with multiple data sources including banking
-            records.
-          </p>
+          <h1>Default</h1>
+          <p>Past default is the strongest predictor of future default</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- No</span>
+            </li>
+            <li class="very-high-risk">
+              <p><span class="very-high-risk-badge"></span>Very High Risk</p>
+              <span>- Yes -> Almost got rejected</span>
+            </li>
+          </ul>
         </div>
 
         <!-- Feature 6: Predictive Insights Dashboard -->
         <div class="feature-card">
           <div class="feature-card-header">
-            <i data-lucide="trending-up" style="color: #0099ff"></i>
+            <i data-lucide="dollar-sign" style="color: #ff7700"></i>
             <div class="feature-badge">
-              <p>Core Feature</p>
+              <p>Financial Risk Indicators</p>
             </div>
           </div>
-          <h1>Predictive Insights</h1>
+          <h1>Balance</h1>
+          <p>Balance reflects savings buffer and financial discipline.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- High positive balance</span>
+            </li>
+            <li class="very-high-risk">
+              <p><span class="very-high-risk-badge"></span>Very High Risk</p>
+              <span>- Low or negative balance</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Factor 7: Housing -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="dollar-sign" style="color: #ff7700"></i>
+            <div class="feature-badge">
+              <p>Financial Risk Indicators</p>
+            </div>
+          </div>
+          <h1>Housing</h1>
           <p>
-            Interactive result section provide lenders with predictive analytics
-            and trends for smarter decision-making.
+            Housing loans show responsibility but increase monthly expenses.
           </p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- No active housing loan</span>
+            </li>
+            <li>
+              <p><span class="medium-risk-badge"></span>Medium Risk</p>
+              <span
+                >- Has an active housing loan (stable but fixed
+                obligation)</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Factor 8: Loan -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="dollar-sign" style="color: #ff7700"></i>
+            <div class="feature-badge">
+              <p>Financial Risk Indicators</p>
+            </div>
+          </div>
+          <h1>Loan</h1>
+          <p>Existing loans increase financial pressure.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- No personal loan</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Has an active personal loan </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Factor 8: Contact -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="dollar-sign" style="color: #ff7700"></i>
+            <div class="feature-badge">
+              <p>Financial Risk Indicators</p>
+            </div>
+          </div>
+          <h1>Contact</h1>
+          <p>
+            Cellular contact usually means better engagment and accessibility.
+          </p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Cellular</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Telephone Unknown </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Factor 8: Contact -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>Contact</h1>
+          <p>
+            Cellular contact usually means better engagment and accessibility.
+          </p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Cellular</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Telephone Unknown </span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Factor 8: Month -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>Month</h1>
+          <p>
+            Seasonality affects customer willingness and financial readiness.
+          </p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- High Response months (e.g. Mar, Apr, May)</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Low Response Months</span>
+            </li>
+          </ul>
+        </div>
+
+        <!--  Day -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>Day</h1>
+          <p>Day of contact does not reflect financial behavior.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Impact</p>
+              <span>- Minimal Risk Affect</span>
+            </li>
+          </ul>
+        </div>
+
+        <!--  Campaign -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>Campaign</h1>
+          <p>Repeated attempts usually mean low interest or rejection.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- 1 - 2 Contacts</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Many repeated contacts</span>
+            </li>
+          </ul>
+        </div>
+
+        <!--  Campaign -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>PDays - Previous Days Since Contact</h1>
+          <p>Prior interaction improves trust and familiarity.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Recently contacted before</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Not contacted before / very long gap</span>
+            </li>
+          </ul>
+        </div>
+
+        <!--  Previous -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>Previous</h1>
+          <p>Prior relationship improves approval likelihood.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Previous > 0</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Previous = 0</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- POutcome -->
+        <div class="feature-card">
+          <div class="feature-card-header">
+            <i data-lucide="phone" style="color: #0000ff"></i>
+            <div class="feature-badge">
+              <p>Interaction & Campaign Behavior</p>
+            </div>
+          </div>
+          <h1>Previous Outcome</h1>
+          <p>Previous success is a strong positive signal.</p>
+          <ul>
+            <li>
+              <p><span class="low-risk-badge"></span>Low Risk</p>
+              <span>- Success</span>
+            </li>
+            <li>
+              <p><span class="high-risk-badge"></span>High Risk</p>
+              <span>- Failure / Unknown</span>
+            </li>
+          </ul>
         </div>
       </div>
     </main>
   </body>
   <!-- <script src="../js/navbar.js"></script> -->
+
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();

@@ -103,3 +103,58 @@
   margin-top: 0.5rem;
   text-align: justify;
 }
+
+.feature-card ul {
+  color: white;
+  margin-top: 0.5rem;
+  text-align: justify;
+  padding-left: 0rem;
+  list-style: none;
+}
+
+.feature-card ul li span {
+  display: block;
+  margin-left: 1rem;
+  text-align: start;
+}
+
+.feature-card ul li .low-risk-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  margin-left: 0;
+}
+.feature-card ul li .high-risk-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ff7300ff;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  margin-left: 0;
+}
+.feature-card ul li .medium-risk-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ffb300ff;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  margin-left: 0;
+}
+.feature-card ul li .very-high-risk-badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #ff0000ff;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
+  margin-left: 0;
+}
