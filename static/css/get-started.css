@@ -159,6 +159,14 @@
   font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+  text-align: center;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: #643b9a;
+}
+.get-started-contribution-right-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
   text-align: start;
   text-decoration-thickness: 1.5px;
   text-decoration-color: #643b9a;
