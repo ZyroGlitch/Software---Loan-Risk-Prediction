@@ -28,6 +28,9 @@ document.getElementById("form").addEventListener("submit", async (e) => {
 
   const result = await response.json();
 
+  // Feature Indicators Function Call
+  runPrediction(payload);
+
   /* ================= BASELINE MODEL ================= */
   if (result.baseline_model) {
     document.getElementById("baseline-status").textContent =
@@ -57,4 +60,82 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     document.getElementById("enhanced-confidence").textContent =
       result.enhanced_model.confidence_score + "%";
   }
+
+  /* ================= Feature Indicators (Helper functions) ================= */
+
+  function renderIndicators(containerId, items) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    items.forEach(item => {
+      const pct = Number(item.impact_percent).toFixed(2);
+
+      const indicator = document.createElement("div");
+      indicator.className = "indicator";
+
+      indicator.innerHTML = `
+        <div class="indicator-chart"
+            data-percentage="${pct}"
+            style="--percentage: ${pct}">
+          <span class="indicator-value">${pct}%</span>
+        </div>
+        <p class="indicator-label">${formatLabel(item.feature)}</p>
+      `;
+
+      container.appendChild(indicator);
+    });
+  }
+
+  function formatLabel(feature) {
+    const map = {
+      age: "Age",
+      marital: "Marital Status",
+      education: "Highest Educational Attainment",
+      job: "Job",
+      contact: "Phone Type",
+      balance: "Balance",
+      housing: "Housing",
+      default: "Default",
+      loan: "Loan",
+      day: "Day",
+      duration: "Duration",
+      month: "Month",
+      campaign: "Campaign",
+      pdays: "Days Since Contact",
+      previous: "Previous Contacts",
+      poutcome: "Previous Outcome"
+    };
+    return map[feature] || feature;
+  }
+
+
+  /* ================= Feature Indicators (FETCH + INJECT) ================= */
+  async function runPrediction(payload) {
+  const res = await fetch("/predict", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  const data = await res.json();
+
+  // BASELINE SHAP (16 features)
+  if (data.baseline_explainability) {
+    renderIndicators(
+      "baseline-indicators",
+      data.baseline_explainability.items
+    );
+  }
+
+  // OPTIMIZED SHAP (16 features, final blend)
+  if (data.enhanced_explainability_16) {
+    renderIndicators(
+      "optimized-indicators",
+      data.enhanced_explainability_16.items
+    );
+  }
+}
+
+
+  
 });

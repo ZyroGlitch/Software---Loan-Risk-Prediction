@@ -296,6 +296,12 @@
   line-height: 1.2;
 }
 
+.feature-indicators {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
 .result-indicators {
   display: flex;
   justify-content: space-between;
