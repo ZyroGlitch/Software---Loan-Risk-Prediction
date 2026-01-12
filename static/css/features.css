@@ -86,7 +86,7 @@
 .feature-badge p {
   margin: 0 !important;
   padding: 0;
-  line-height: 1;
+  line-height: 1.5;
   padding: 3px;
 }
 
@@ -94,7 +94,7 @@
   color: white;
   margin-top: 0.5rem;
   text-align: start;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   line-height: 1.75rem;
 }
 
@@ -102,6 +102,7 @@
   color: white;
   margin-top: 0.5rem;
   text-align: justify;
+  line-height: 1.5rem;
 }
 
 .feature-card ul {

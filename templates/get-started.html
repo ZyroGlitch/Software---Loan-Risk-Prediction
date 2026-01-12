@@ -167,9 +167,7 @@
         <div class="get-started-right">
           <!-- Baseline Model -->
           <div class="result-card">
-            <h2 class="get-started-right-title">
-              Result for Random Forest Model
-            </h2>
+            <h2 class="get-started-right-title">Random Forest Model</h2>
             <div class="result-header">
               <h3 class="result-status" id="baseline-status">None</h3>
               <p class="result-status-label">LOAN STATUS</p>
@@ -246,7 +244,7 @@
           <!-- Optimized Model -->
           <div class="result-card">
             <h2 class="get-started-right-title">
-              Result for Optimized Random Forest with XGBoost
+              Optimized Random Forest with XGBoost
             </h2>
             <div class="result-header">
               <h3 class="result-status" id="enhanced-status">None</h3>
@@ -323,31 +321,95 @@
           </div>
 
           <!-- Feature Impacts & Contributions -->
+
           <!-- Baseline Model -->
           <div class="result-card">
-            <h2 class="get-started-right-title" style="margin-bottom: 4rem">
-              Feature Contributions & Impacts - Random Forest Model
+            <h2 class="get-started-right-title">
+              Feature Contributions & Impacts
             </h2>
-
+            <p class="get-started-right-title-model">Random Forest Model</p>
             <div
               class="feature-indicators"
               id="baseline-indicators"
               style="margin-bottom: 1rem"
-            ></div>
+            >
+              <div id="baseline-features-container"></div>
+            </div>
+            <div class="stats-container">
+              <div class="stats-grid">
+                <div class="stat-card stat-blue">
+                  <div class="stat-label">Top Feature</div>
+                  <div
+                    class="stat-value-name"
+                    id="baselineTopFeatureName"
+                  ></div>
+                </div>
+                <div class="stat-card stat-green">
+                  <div class="stat-label">Top Feature %</div>
+                  <div
+                    class="stat-value"
+                    id="baselineTopFeaturePercentage"
+                  ></div>
+                </div>
+                <div class="stat-card stat-yellow">
+                  <div class="stat-label">Lowest Feature</div>
+                  <div class="stat-value" id="baselineLowestFeatureName"></div>
+                </div>
+                <div class="stat-card stat-red">
+                  <div class="stat-label">Lowest Feature %</div>
+                  <div
+                    class="stat-value"
+                    id="baselineLowestFeaturePercentage"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Optimized Model -->
           <div class="result-card">
-            <h2 class="get-started-right-title" style="margin-bottom: 4rem">
-              Feature Contributions & Impacts - Optimized Random Forest with
-              XGBoost
+            <h2 class="get-started-right-title">
+              Feature Contributions & Impacts
             </h2>
-
+            <p class="get-started-right-title-model">
+              Optimized Random Forest with XGBoost
+            </p>
             <div
               class="feature-indicators"
               id="optimized-indicators"
               style="margin-bottom: 1rem"
-            ></div>
+            >
+              <div id="optimized-features-container"></div>
+            </div>
+            <div class="stats-container">
+              <div class="stats-grid">
+                <div class="stat-card stat-blue">
+                  <div class="stat-label">Top Feature</div>
+                  <div
+                    class="stat-value-name"
+                    id="optimizedTopFeatureName"
+                  ></div>
+                </div>
+                <div class="stat-card stat-green">
+                  <div class="stat-label">Top Feature %</div>
+                  <div
+                    class="stat-value"
+                    id="optimizedTopFeaturePercentage"
+                  ></div>
+                </div>
+                <div class="stat-card stat-yellow">
+                  <div class="stat-label">Lowest Feature</div>
+                  <div class="stat-value" id="optimizedLowestFeatureName"></div>
+                </div>
+                <div class="stat-card stat-red">
+                  <div class="stat-label">Lowest Feature %</div>
+                  <div
+                    class="stat-value"
+                    id="optimizedLowestFeaturePercentage"
+                  ></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
