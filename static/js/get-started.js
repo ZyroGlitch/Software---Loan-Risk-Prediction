@@ -13,6 +13,10 @@ import {
   monthData,
   previousOutcomeData,
 } from "../data/get-started-data.js";
+import {
+  renderFeatures,
+  renderFeatureStats,
+} from "./get-started-contribution.js";
 
 function populateSelectOptions(
   selectId,
@@ -59,15 +63,30 @@ function initGetStartedOptions() {
   const globals = window.getStartedData || {};
 
   populateSelectOptions("job", jobData ?? globals.jobData ?? []);
-  populateSelectOptions("education", educationData ?? globals.educationData ?? []);
-  populateSelectOptions("marital", maritalStatusData ?? globals.maritalStatusData ?? []);
+  populateSelectOptions(
+    "education",
+    educationData ?? globals.educationData ?? []
+  );
+  populateSelectOptions(
+    "marital",
+    maritalStatusData ?? globals.maritalStatusData ?? []
+  );
   populateSelectOptions("phone", phoneData ?? globals.phoneData ?? []);
   populateSelectOptions("loan", loanData ?? globals.loanData ?? []);
   populateSelectOptions("housing", housingData ?? globals.housingData ?? []);
   populateSelectOptions("default", defaultData ?? globals.defaultData ?? []);
   populateSelectOptions("day", dayData ?? globals.dayData ?? []);
   populateSelectOptions("month", monthData ?? globals.monthData ?? []);
-  populateSelectOptions("previous-outcome", previousOutcomeData ?? globals.previousOutcomeData ?? []);
+  populateSelectOptions(
+    "previous-outcome",
+    previousOutcomeData ?? globals.previousOutcomeData ?? []
+  );
+
+  // For feature contribution indicators
+  renderFeatures("baseline-indicators", "baseline");
+  renderFeatures("optimized-indicators", "optimized");
+  renderFeatureStats("baseline");
+  renderFeatureStats("optimized");
 }
 
 // Initialize when DOM is ready
