@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSV Reader</title>
+
+    <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/csv-reader.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+    <main class="page">
+      <section class="card">
+        <header class="card-head">
+          <div>
+            <h2 class="title">Upload CSV & Preview</h2>
+            <p class="subtitle">
+              Import your dataset, review it, then run prediction.
+            </p>
+          </div>
+
+          <span class="badge">CSV Reader</span>
+        </header>
+
+        <div class="controls">
+          <label class="file-field">
+            <input id="csvFile" type="file" accept=".csv,text/csv" />
+            <span class="file-btn">Choose CSV</span>
+            <span class="file-name" id="fileName">No file selected</span>
+          </label>
+
+          <button id="predict-btn" class="btn-primary" type="button">
+            Predict
+          </button>
+        </div>
+
+        <p class="hint">
+          Tip: supports commas, quotes, and newlines inside quotes.
+        </p>
+
+        <div id="meta" class="meta"></div>
+        <div id="error" class="error"></div>
+
+        <div class="table-wrap">
+          <table id="table"></table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Loader Overlay (KEEP THIS, just ensure it's below main) -->
+    <div id="loader" class="loader-overlay" aria-hidden="true">
+      <div class="loader-card" role="dialog" aria-live="polite">
+        <div class="loader-top">
+          <div class="loader-ring"></div>
+          <div>
+            <p class="loader-title" id="loaderTitle">Loading your CSV…</p>
+            <p class="loader-sub" id="loaderSub">
+              Reading file and preparing preview
+            </p>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+
+          <div class="progress-text">
+            <span id="progressLeft">Please wait…</span>
+            <span id="progressRight">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Loader Overlay -->
+    <div id="loader" class="loader-overlay">
+      <div class="loader-card">
+        <div class="loader-top">
+          <div class="loader-ring"></div>
+          <div>
+            <p class="loader-title" id="loaderTitle">Loading your CSV…</p>
+            <p class="loader-sub" id="loaderSub">
+              Reading file and preparing preview
+            </p>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+          </div>
+
+          <div class="progress-text">
+            <span id="progressLeft">Please wait…</span>
+            <span id="progressRight">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/handler/csv-reader-submit.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/get-started.js') }}"
+    ></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/handler/get-started-submit.js') }}"
+    ></script>
+  </body>
+</html>

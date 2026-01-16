@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Risk Prediction - Dashboard</title>
+
+    <!-- Load compiled CSS -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/index.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/prediction-dashboard.css') }}"
+    />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <main>
+      <div class="get-started-content">
+        <div class="grid-container">
+          <a href="/upload" class="grid-item">
+            <img
+              src="{{ url_for('static', filename='icons/file-spreadsheet.svg') }}"
+              alt="icon"
+            />
+            <h2 class="item-title">Upload Dataset</h2>
+            <p class="item-description">
+              Easily upload your loan dataset for analysis and risk prediction.
+            </p>
+          </a>
+          <a href="/get-started" class="grid-item">
+            <img
+              src="{{ url_for('static', filename='icons/text-select.svg') }}"
+              alt="icon"
+            />
+            <h2 class="item-title">Form Submission</h2>
+            <p class="item-description">
+              Fill out the form with relevant loan applicant details to get
+              instant risk predictions.
+            </p>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  </body>
+</html>

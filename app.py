@@ -275,6 +275,16 @@ def home():
     return render_template("home.html")
 
 
+@app.route("/dashboard")
+def dashboard():
+    return render_template("prediction-dashboard.html")
+
+
+@app.route("/upload")
+def upload():
+    return render_template("csv-reader.html")
+
+
 @app.route("/get-started")
 def get_started():
     return render_template("get-started.html")
