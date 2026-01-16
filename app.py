@@ -326,6 +326,7 @@ def predict():
         df = df[feature_names]
 
         result = {}
+        df_hybrid = None
 
         # ================= Enhanced Model =================
         if artifact and rf_feature_model:
@@ -378,7 +379,8 @@ def predict():
                     }
 
                 # Enhanced SHAP -> FINAL BLEND explainability in 16-feature baseline format (NO rf_oof_proba)
-                if artifact and rf_feature_model and enhanced_rf_explainer is not None and enhanced_xgb_explainer is not None:
+                # if artifact and rf_feature_model and enhanced_rf_explainer is not None and enhanced_xgb_explainer is not None:
+                if artifact and rf_feature_model and df_hybrid is not None and enhanced_rf_explainer is not None and enhanced_xgb_explainer is not None:
                     rf_vals, _ = _get_pos_class_shap(
                         enhanced_rf_explainer, df_hybrid)
                     xgb_vals, _ = _get_pos_class_shap(

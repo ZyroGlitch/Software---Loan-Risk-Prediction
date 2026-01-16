@@ -1,4 +1,6 @@
-document.getElementById("form").addEventListener("submit", async (e) => {
+const form = document.getElementById("form");
+
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const payload = {
@@ -20,122 +22,167 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     poutcome: Number(document.getElementById("previous-outcome").value),
   };
 
-  const response = await fetch("/predict", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
+  let data;
+  try {
+    const res = await fetch("/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-  const result = await response.json();
+    if (!res.ok) {
+      const t = await res.text();
+      throw new Error(t || "Predict failed");
+    }
 
-  // Feature Indicators Function Call
-  runPrediction(payload);
+    data = await res.json();
+  } catch (err) {
+    console.error(err);
+    return;
+  }
 
-  /* ================= BASELINE MODEL ================= */
-  if (result.baseline_model) {
+  if (data.baseline_model) {
     document.getElementById("baseline-status").textContent =
-      result.baseline_model.loan_status;
+      data.baseline_model.loan_status;
 
     document.getElementById("baseline-risk").textContent =
-      result.baseline_model.risk_percentage + "%";
-
-    // document.getElementById("baseline-accuracy").textContent =
-    //   result.baseline_model.rf_probability + "%";
+      Number(data.baseline_model.risk_percentage).toFixed(2) + "%";
 
     document.getElementById("baseline-confidence").textContent =
-      result.baseline_model.confidence_score + "%";
+      Number(data.baseline_model.confidence_score).toFixed(2) + "%";
   }
 
-  /* ================= ENHANCED MODEL ================= */
-  if (result.enhanced_model) {
+  if (data.enhanced_model) {
     document.getElementById("enhanced-status").textContent =
-      result.enhanced_model.loan_status;
+      data.enhanced_model.loan_status;
 
     document.getElementById("enhanced-risk").textContent =
-      result.enhanced_model.risk_percentage + "%";
-
-    // document.getElementById("enhanced-accuracy").textContent =
-    //   result.enhanced_model.xgb_probability + "%";
+      Number(data.enhanced_model.risk_percentage).toFixed(2) + "%";
 
     document.getElementById("enhanced-confidence").textContent =
-      result.enhanced_model.confidence_score + "%";
+      Number(data.enhanced_model.confidence_score).toFixed(2) + "%";
   }
 
-  /* ================= Feature Indicators (Helper functions) ================= */
-
-  function renderIndicators(containerId, items) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = "";
-
-    items.forEach(item => {
-      const pct = Number(item.impact_percent).toFixed(2);
-
-      const indicator = document.createElement("div");
-      indicator.className = "indicator";
-
-      indicator.innerHTML = `
-        <div class="indicator-chart"
-            data-percentage="${pct}"
-            style="--percentage: ${pct}">
-          <span class="indicator-value">${pct}%</span>
-        </div>
-        <p class="indicator-label">${formatLabel(item.feature)}</p>
-      `;
-
-      container.appendChild(indicator);
-    });
+  if (data.baseline_explainability?.items) {
+    renderFeatureBars("baseline-features-container", data.baseline_explainability.items);
+    renderTopBottomFromImpact(
+      data.baseline_explainability.items,
+      "baselineTopFeatureName",
+      "baselineTopFeaturePercentage",
+      "baselineLowestFeatureName",
+      "baselineLowestFeaturePercentage"
+    );
   }
 
-  function formatLabel(feature) {
-    const map = {
-      age: "Age",
-      marital: "Marital Status",
-      education: "Highest Educational Attainment",
-      job: "Job",
-      contact: "Phone Type",
-      balance: "Balance",
-      housing: "Housing",
-      default: "Default",
-      loan: "Loan",
-      day: "Day",
-      duration: "Duration",
-      month: "Month",
-      campaign: "Campaign",
-      pdays: "Days Since Contact",
-      previous: "Previous Contacts",
-      poutcome: "Previous Outcome"
-    };
-    return map[feature] || feature;
+  if (data.enhanced_explainability_16?.items) {
+    renderFeatureBars("optimized-features-container", data.enhanced_explainability_16.items);
+    renderTopBottomFromImpact(
+      data.enhanced_explainability_16.items,
+      "optimizedTopFeatureName",
+      "optimizedTopFeaturePercentage",
+      "optimizedLowestFeatureName",
+      "optimizedLowestFeaturePercentage"
+    );
   }
+});
 
+function renderFeatureBars(containerId, items) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-  /* ================= Feature Indicators (FETCH + INJECT) ================= */
-  async function runPrediction(payload) {
-  const res = await fetch("/predict", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+  const rows = (items || []).map((x) => ({
+    feature: x.feature,
+    impact: Number(x.impact_percent ?? 0),
+    contribution: Number(x.contribution ?? 0),
+  }));
+
+  const maxAbs = rows.reduce((m, x) => Math.max(m, Math.abs(x.contribution)), 0) || 1;
+
+  rows.forEach((x) => {
+    x.contributionPercent = (Math.abs(x.contribution) / maxAbs) * 100; // 0..100
+    x.sign = x.contribution >= 0 ? "+" : "−";
   });
 
-  const data = await res.json();
+  container.innerHTML = "";
 
-  // BASELINE SHAP (16 features)
-  if (data.baseline_explainability) {
-    renderIndicators(
-      "baseline-indicators",
-      data.baseline_explainability.items
-    );
-  }
+  rows.forEach((x, idx) => {
+    const impactPct = x.impact.toFixed(2);
+    const contribPct = x.contributionPercent.toFixed(2);
 
-  // OPTIMIZED SHAP (16 features, final blend)
-  if (data.enhanced_explainability_16) {
-    renderIndicators(
-      "optimized-indicators",
-      data.enhanced_explainability_16.items
-    );
-  }
+    const row = document.createElement("div");
+    row.className = "feature-row";
+
+    row.innerHTML = `
+      <div class="feature-row-title">
+        <span class="feature-row-index">${idx + 1}</span>
+        <span class="feature-row-name">${formatLabel(x.feature)}</span>
+      </div>
+
+      <div class="feature-bar-group">
+        <div class="feature-bar-label">
+          <span>Impact</span>
+          <span>${impactPct}%</span>
+        </div>
+        <div class="feature-bar">
+          <div class="feature-bar-fill" style="width:${impactPct}%;"></div>
+        </div>
+      </div>
+
+      <div class="feature-bar-group">
+        <div class="feature-bar-label">
+          <span>Contribution</span>
+          <span class="contrib ${x.sign === "−" ? "neg" : "pos"}">${x.sign}${contribPct}%</span>
+        </div>
+        <div class="feature-bar">
+          <div class="feature-bar-fill" style="width:${contribPct}%;"></div>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(row);
+  });
 }
 
+function renderTopBottomFromImpact(items, topNameId, topPctId, lowNameId, lowPctId) {
+  const arr = (items || [])
+    .map((x) => ({ feature: x.feature, v: Number(x.impact_percent ?? 0) }))
+    .sort((a, b) => b.v - a.v);
 
-  
-});
+  if (!arr.length) return;
+
+  const top = arr[0];
+  const low = arr[arr.length - 1];
+
+  const topName = document.getElementById(topNameId);
+  const topPct = document.getElementById(topPctId);
+  const lowName = document.getElementById(lowNameId);
+  const lowPct = document.getElementById(lowPctId);
+
+  if (topName) topName.textContent = formatLabel(top.feature);
+  if (topPct) topPct.textContent = top.v.toFixed(2) + "%";
+  if (lowName) lowName.textContent = formatLabel(low.feature);
+  if (lowPct) lowPct.textContent = low.v.toFixed(2) + "%";
+}
+
+function formatLabel(feature) {
+  const map = {
+    age: "Age",
+    marital: "Marital Status",
+    education: "Highest Educational Attainment",
+    job: "Job",
+    contact: "Phone Type",
+    balance: "Balance",
+    housing: "Housing",
+    default: "Default",
+    loan: "Loan",
+    day: "Day",
+    duration: "Duration",
+    month: "Month",
+    campaign: "Campaign",
+    pdays: "Days Since Contact",
+    previous: "Previous Contacts",
+    poutcome: "Previous Outcome",
+  };
+
+  return map[feature] || feature;
+}

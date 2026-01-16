@@ -7,27 +7,47 @@ export function renderFeatures(containerId, type = "baseline") {
   const container = document.getElementById(containerId);
 
   if (!container) return;
-  const features = type === "baseline" ? BaseLineFeatures : OptimizedFeatures;
   const html = features
-    .map(
-      (feature, index) => `
-      <div class="feature-item">
-        <div class="feature-header">
-          <div class="feature-name-container">
-            <span class="feature-number">${index + 1}</span>
-            <h1 class="feature-name">${feature.name}</h1>
-          </div>
-          <span class="feature-importance">${feature.importance}%</span>
-        </div>
-        <div class="progress-bar-container">
-          <div class="progress-bar" style="width: ${feature.importance}%"></div>
-        </div>
-      </div>
-    `
-    )
-    .join("");
+    .map((feature, index) => {
+      const imp = Number(feature.importance || 0).toFixed(2);
+      const con = Number(feature.contribution || 0).toFixed(2);
 
-  container.innerHTML = html;
+      return `
+        <div class="feature-item">
+          <div class="feature-result-box">
+            <div class="feature-header">
+              <div class="feature-name-container">
+                <span class="feature-number">${index + 1}</span>
+                <h1 class="feature-name">${feature.name}</h1>
+              </div>
+            </div>
+
+            <div class="feature-result">
+              <div class="feature-result-label">
+                <p>Impact</p>
+                <span class="feature-importance">${imp}%</span>
+              </div>
+
+              <div class="progress-bar-container">
+                <div class="progress-bar" style="width: ${imp}%"></div>
+              </div>
+            </div>
+
+            <div class="feature-result">
+              <div class="feature-result-label">
+                <p>Contribution</p>
+                <span class="feature-importance">${con}%</span>
+              </div>
+
+              <div class="progress-bar-container">
+                <div class="progress-bar" style="width: ${con}%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    })
+    .join("");
 }
 
 export function renderFeatureStats(type = "baseline") {
