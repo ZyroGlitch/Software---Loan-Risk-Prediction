@@ -501,3 +501,166 @@
   font-weight: 700;
   color: #e2e8f0;
 }
+
+
+
+
+
+/* ===== FIX: prevent horizontal scrolling / overflow ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+main,
+.get-started-content,
+.get-started-left,
+.get-started-right,
+.result-card,
+.get-started-left-form,
+.get-started-left-card {
+  max-width: 100%;
+}
+
+/* Avoid wide padding causing overflow on small screens */
+.content-header {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Make grids responsive to avoid exceeding viewport */
+@media (max-width: 1024px) {
+  .get-started-right {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .get-started-left-card {
+    grid-template-columns: 1fr;
+  }
+
+  .form-content {
+    grid-template-columns: 1fr;
+  }
+
+  .result-indicators {
+    flex-wrap: wrap;
+  }
+}
+
+
+/* ===== Layout polish after removing horizontal scroll ===== */
+
+/* IMPORTANT: allow grid children to shrink properly (prevents clipped content) */
+.get-started-right>*,
+.get-started-left>*,
+.result-card,
+.get-started-left-form,
+.get-started-left-card,
+#baseline-features-container,
+#optimized-features-container {
+  min-width: 0;
+}
+
+/* Give the whole page consistent breathing room */
+main {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Keep the two-column results clean and equal */
+.get-started-right {
+  align-items: start;
+}
+
+.result-card {
+  width: 100%;
+}
+
+/* Fix feature rows: avoid percent text being cut off */
+.feature-header {
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.feature-name-container {
+  min-width: 0;
+}
+
+.feature-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.feature-importance {
+  white-space: nowrap;
+}
+
+/* On medium screens, avoid cramped two-column cards */
+@media (max-width: 1200px) {
+  .get-started-right {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===== FIX: stats cards layout (Top/Lowest Feature) ===== */
+.stats-container {
+  width: 100%;
+}
+
+.stats-grid {
+  align-items: stretch;
+}
+
+.stat-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.25rem 1rem;
+  border-radius: 0.85rem;
+}
+
+/* prevent big text from forcing weird sizing */
+.stat-value,
+.stat-value-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stat-label {
+  line-height: 1.2;
+}
+
+.stat-value,
+.stat-value-name {
+  line-height: 1.1;
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+}
+
+/* make the 4 cards fit nicely on smaller screens */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -39,8 +39,8 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     document.getElementById("baseline-risk").textContent =
       result.baseline_model.risk_percentage + "%";
 
-    document.getElementById("baseline-accuracy").textContent =
-      result.baseline_model.rf_probability + "%";
+    // document.getElementById("baseline-accuracy").textContent =
+    //   result.baseline_model.rf_probability + "%";
 
     document.getElementById("baseline-confidence").textContent =
       result.baseline_model.confidence_score + "%";
@@ -54,8 +54,8 @@ document.getElementById("form").addEventListener("submit", async (e) => {
     document.getElementById("enhanced-risk").textContent =
       result.enhanced_model.risk_percentage + "%";
 
-    document.getElementById("enhanced-accuracy").textContent =
-      result.enhanced_model.xgb_probability + "%";
+    // document.getElementById("enhanced-accuracy").textContent =
+    //   result.enhanced_model.xgb_probability + "%";
 
     document.getElementById("enhanced-confidence").textContent =
       result.enhanced_model.confidence_score + "%";
