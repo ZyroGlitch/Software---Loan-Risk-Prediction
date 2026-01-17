@@ -1,6 +1,5 @@
-// Populate select options in the Get Started form
-// Import data for select options. If modules aren't supported in the
-// current page, we will also try to read from a global fallback.
+// get-started.js file
+
 import {
   jobData,
   educationData,

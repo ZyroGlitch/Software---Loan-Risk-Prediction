@@ -1,7 +1,149 @@
+// get-started-submit.js file
+
 const form = document.getElementById("form");
+
+// ----------------------------------------------------------------------------
+
+// Pdf Report Logic Functionality
+const reportModal = document.getElementById("reportModal");
+const reportCloseBtn = document.getElementById("reportCloseBtn");
+const reportDownloadBtn = document.getElementById("reportDownloadBtn");
+
+let lastPayload = null;
+
+function openReportModal() {
+  if (!reportModal) return;
+  reportModal.classList.add("is-open");
+  reportModal.setAttribute("aria-hidden", "false");
+}
+
+function closeReportModal() {
+  if (!reportModal) return;
+  reportModal.classList.remove("is-open");
+  reportModal.setAttribute("aria-hidden", "true");
+}
+
+if (reportCloseBtn) reportCloseBtn.addEventListener("click", closeReportModal);
+
+if (reportModal) {
+  reportModal.addEventListener("click", (e) => {
+    if (e.target === reportModal) closeReportModal();
+  });
+}
+
+if (reportDownloadBtn) {
+  reportDownloadBtn.addEventListener("click", async () => {
+    if (!lastPayload) return;
+
+    try {
+      reportDownloadBtn.disabled = true;
+      reportDownloadBtn.textContent = "Generating...";
+
+      const res = await fetch("/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lastPayload),
+      });
+
+      if (!res.ok) {
+        const t = await res.text();
+        throw new Error(t || "Report failed");
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Loan_Risk_Report.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      URL.revokeObjectURL(url);
+      closeReportModal();
+    } catch (err) {
+      console.error(err);
+    } finally {
+      reportDownloadBtn.disabled = false;
+      reportDownloadBtn.textContent = "Download";
+    }
+  });
+}
+
+// ----------------------------------------------------------------------------
+
+// Error Message Handler Functionality
+const errorModal = document.getElementById("errorModal");
+const errorCloseBtn = document.getElementById("errorCloseBtn");
+const errorModalMsg = document.getElementById("errorModalMsg");
+const errorModalTitle = document.getElementById("errorModalTitle");
+
+function openErrorModal(message) {
+  if (!errorModal) return;
+  if (errorModalMsg) errorModalMsg.textContent = message;
+  errorModal.classList.add("is-open");
+  errorModal.setAttribute("aria-hidden", "false");
+}
+
+function closeErrorModal() {
+  if (!errorModal) return;
+  errorModal.classList.remove("is-open");
+  errorModal.setAttribute("aria-hidden", "true");
+}
+
+if (errorCloseBtn) errorCloseBtn.addEventListener("click", closeErrorModal);
+
+if (errorModal) {
+  errorModal.addEventListener("click", (e) => {
+    if (e.target === errorModal) closeErrorModal();
+  });
+}
+
+function isEmpty(value) {
+  return value === null || value === undefined || String(value).trim() === "";
+}
+
+function getFieldValue(id) {
+  const el = document.getElementById(id);
+  if (!el) return "";
+  return el.value;
+}
+
+function validateAllFields() {
+  const required = [
+    "age",
+    "job",
+    "marital",
+    "education",
+    "phone",
+    "balance",
+    "housing",
+    "default",
+    "loan",
+    "day",
+    "month",
+    "duration",
+    "campaign",
+    "pdays",
+    "previous",
+    "previous-outcome",
+  ];
+
+  const missing = required.filter((id) => isEmpty(getFieldValue(id)));
+  return { ok: missing.length === 0, missing };
+}
+
+// ----------------------------------------------------------------------------
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
+  const check = validateAllFields();
+  if (!check.ok) {
+    openErrorModal("Please complete all required fields before processing the information.");
+    return; // ✅ STOP HERE (no predict, no download modal)
+  }
 
   const payload = {
     age: Number(document.getElementById("age").value),
@@ -21,6 +163,8 @@ form.addEventListener("submit", async (e) => {
     previous: Number(document.getElementById("previous").value),
     poutcome: Number(document.getElementById("previous-outcome").value),
   };
+
+  lastPayload = payload; // Save for report generation
 
   let data;
   try {
@@ -84,6 +228,8 @@ form.addEventListener("submit", async (e) => {
       "optimizedLowestFeaturePercentage"
     );
   }
+
+  openReportModal(); // Show report modal after prediction
 });
 
 function renderFeatureBars(containerId, items) {
