@@ -1,3 +1,5 @@
+// get-started-contribution-data.js file
+
 export const BaseLineFeatures = [
   { key: "duration", name: "Duration", importance: 0, contribution: 0 },
   { key: "housing", name: "Housing", importance: 0, contribution: 0 },
