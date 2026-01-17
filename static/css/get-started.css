@@ -444,7 +444,8 @@
 /* Stats */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin-top: 3rem;
 }
@@ -465,7 +466,11 @@
   padding: 1.5rem 1rem;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.1);
+
+  min-width: 0;
+  overflow: hidden;
 }
+
 .stat-blue {
   background: linear-gradient(
     135deg,
@@ -509,6 +514,39 @@
   font-size: 0.875rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* long feature names */
+.stat-value-name,
+.stat-value {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.2;
+}
+
+/* make the big Top Feature text not blow up */
+.stat-value-name {
+  font-size: clamp(16px, 1.6vw, 26px);
+}
+
+/* responsive: stack cards so they never overflow on smaller widths */
+@media (max-width: 1100px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .stat-value {
