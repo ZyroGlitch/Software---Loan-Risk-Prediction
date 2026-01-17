@@ -1,6 +1,7 @@
 # app.py file
 
 # Pdf Report Imports
+from flask import request
 from reportlab.lib.enums import TA_LEFT, TA_CENTER
 from datetime import datetime
 from unittest import result
@@ -947,6 +948,43 @@ def predict():
         }, 500)
 
 
+@app.route("/predict-batch", methods=["POST"])
+def predict_batch():
+    try:
+        payload = request.get_json()
+        rows = payload.get("rows") if isinstance(payload, dict) else None
+        if not rows or not isinstance(rows, list):
+            return json_response({"error": "No rows provided"}, 400)
+
+        out = []
+        for r in rows:
+            try:
+                res, _ = _run_inference_and_explain(r)
+
+                decision = None
+                if res.get("enhanced_model"):
+                    decision = res["enhanced_model"]["loan_status"]
+                elif res.get("baseline_model"):
+                    decision = res["baseline_model"]["loan_status"]
+                else:
+                    decision = "None"
+
+                out.append({
+                    "ok": True,
+                    "loan_status": decision
+                })
+            except Exception as ee:
+                out.append({
+                    "ok": False,
+                    "error": str(ee)
+                })
+
+        return json_response({"results": out}, 200)
+
+    except Exception as e:
+        return json_response({"error": "Batch prediction failed", "message": str(e)}, 500)
+
+
 @app.route("/report", methods=["POST"])
 def report():
     try:
@@ -963,6 +1001,32 @@ def report():
             BytesIO(pdf_bytes),
             mimetype="application/pdf",
             as_attachment=True,
+            download_name=filename
+        )
+
+    except Exception as e:
+        return json_response({
+            "error": "Report generation failed",
+            "message": str(e)
+        }, 500)
+
+
+@app.route("/report-row", methods=["POST"])
+def report_row():
+    try:
+        data = request.get_json()
+        if not data:
+            return json_response({"error": "No data provided"}, 400)
+
+        result, _ = _run_inference_and_explain(data)
+        pdf_bytes, now = _build_pdf_bytes(result, data)
+
+        filename = "Loan_Risk_Report_" + now.strftime("%Y%m%d_%H%M%S") + ".pdf"
+
+        return send_file(
+            BytesIO(pdf_bytes),
+            mimetype="application/pdf",
+            as_attachment=True,   # ✅ open in browser tab
             download_name=filename
         )
 

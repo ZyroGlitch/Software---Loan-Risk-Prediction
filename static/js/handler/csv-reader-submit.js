@@ -1,3 +1,5 @@
+// csv-reader-submit.js file
+
 const fileInput = document.getElementById("csvFile");
 const table = document.getElementById("table");
 const errorEl = document.getElementById("error");
@@ -166,24 +168,19 @@ async function renderPredictedTable(rows) {
 
   const headers = rows[0];
   const visibleIndexes = headers
-  .map((h, i) => (HIDDEN_COLUMNS.includes(h.toLowerCase()) ? -1 : i))
-  .filter(i => i !== -1);
+    .map((h, i) => (HIDDEN_COLUMNS.includes(h.toLowerCase()) ? -1 : i))
+    .filter(i => i !== -1);
 
   const dataRows = rows.slice(1);
 
   const thead = document.createElement("thead");
   const tbody = document.createElement("tbody");
 
-  // New header: 2 columns FIRST, then original headers
   const headerTr = document.createElement("tr");
 
   const thReport = document.createElement("th");
   thReport.textContent = "Report";
   headerTr.appendChild(thReport);
-
-  const thDecision = document.createElement("th");
-  thDecision.textContent = "Decision";
-  headerTr.appendChild(thDecision);
 
   visibleIndexes.forEach(i => {
     const th = document.createElement("th");
@@ -193,14 +190,11 @@ async function renderPredictedTable(rows) {
 
   thead.appendChild(headerTr);
 
-  // Each row: [ReportLink, Decision, ...original columns]
-  dataRows.forEach((rowArr, idx) => {
+  dataRows.forEach((rowArr) => {
     const tr = document.createElement("tr");
 
     const recordObj = rowToObject(headers, rowArr);
-    const recordId = idx + 1;
 
-    // 1) Report link column
     const tdReport = document.createElement("td");
     tdReport.className = "report-link";
 
@@ -209,26 +203,17 @@ async function renderPredictedTable(rows) {
     a.textContent = "View PDF";
     a.addEventListener("click", (ev) => {
       ev.preventDefault();
-      openRecordTabAsPDF(recordObj, recordId);
+      openRecordTabAsPDF(recordObj);
     });
 
     tdReport.appendChild(a);
     tr.appendChild(tdReport);
 
-    // 2) Decision column (Accepted green / Rejected red)
-    const decision = fakePredict(recordObj); // Replace this later with real backend call if you want
-    const tdDecision = document.createElement("td");
-    tdDecision.textContent = decision;
-    tdDecision.className = decision === "Accepted" ? "accepted" : "rejected";
-    tr.appendChild(tdDecision);
-
-    // Original columns
     visibleIndexes.forEach(i => {
       const td = document.createElement("td");
       td.textContent = rowArr[i];
       tr.appendChild(td);
     });
-
 
     tbody.appendChild(tr);
   });
@@ -237,150 +222,48 @@ async function renderPredictedTable(rows) {
   table.appendChild(tbody);
 }
 
+
 function rowToObject(headers, rowArr) {
   const obj = {};
   for (let i = 0; i < headers.length; i++) obj[headers[i]] = rowArr[i] ?? "";
   return obj;
 }
 
-// SIMPLE demo prediction logic
-// Replace with fetch() to your Flask endpoint when ready.
-function fakePredict(recordObj) {
-  const values = Object.values(recordObj).join(" ").toLowerCase();
-  const accepted = values.includes("yes") || values.includes("approved");
-  return accepted ? "Accepted" : "Rejected";
-}
-
 // Open new tab with full record details + "Download PDF" (Print -> Save as PDF)
-function openRecordTabAsPDF(recordObj, recordId) {
-  const w = window.open("", "_blank");
-  if (!w) return;
+async function openRecordTabAsPDF(recordObj) {
+  const payload = csvRowToPayload(recordObj);
 
-  // const rowsHtml = Object.entries(recordObj)
-  //   .map(
-  //     ([k, v]) =>
-  //       `<tr>
-  //         <th>${escapeHtml(k)}</th>
-  //         <td>${escapeHtml(String(v))}</td>
-  //       </tr>`
-  //   )
-  //   .join("");
+  const requiredKeys = [
+    "age","job","marital","education","contact","balance","housing","default","loan",
+    "day","month","duration","campaign","pdays","previous","poutcome"
+  ];
 
-  const rowsHtml = Object.entries(recordObj)
-  .filter(([k]) => !HIDDEN_COLUMNS.includes(k.toLowerCase()))
+  const missing = requiredKeys.filter(k => payload[k] === null || payload[k] === "" || Number.isNaN(payload[k]));
+  if (missing.length) {
+    alert("Cannot generate PDF. Missing/invalid fields: " + missing.join(", "));
+    return;
+  }
 
+  const res = await fetch("/report-row", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-  w.document.write(`
-    <!doctype html>
-    <html>
-      <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Record ${recordId} Report</title>
+  if (!res.ok) {
+    const t = await res.text();
+    alert("Report failed: " + t);
+    return;
+  }
 
-        <style>
-          body {
-            font-family: Arial, sans-serif;
-            margin: 24px;
-          }
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
 
-          .container {
-            max-width: 900px;
-            margin: 0 auto;
-          }
+  window.open(url, "_blank");
 
-          table {
-            width: 100%;
-            border-collapse: collapse;
-          }
-
-          th, td {
-            padding: 8px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-          }
-
-          th {
-            background: #fafafa;
-          }
-
-          .actions {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 14px;
-          }
-
-          button {
-            padding: 10px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-          }
-
-          .download {
-            background: #000;
-            color: #fff;
-            border: none;
-          }
-
-          .close {
-            background: #fff;
-            border: 1px solid #ddd;
-          }
-
-          /* 🔥 THIS IS THE FIX */
-          @media print {
-            .no-print {
-              display: none !important;
-            }
-
-            body {
-              margin: 0;
-            }
-
-            @page {
-              margin: 20mm;
-            }
-          }
-        </style>
-      </head>
-
-      <body>
-        <div class="container">
-
-          <!-- Visible on screen ONLY -->
-          <div class="no-print">
-            <h2>Record ${recordId} - Full Details</h2>
-            <p style="color:#555;">
-              Click <b>Download PDF</b> then choose <b>Save as PDF</b> in the print dialog.
-            </p>
-
-            <div class="actions">
-              <button class="download" id="downloadPdf">Download PDF</button>
-              <button class="close" id="closeTab">Close</button>
-            </div>
-          </div>
-
-          <!-- ALWAYS INCLUDED IN PDF -->
-          <table>
-            ${rowsHtml}
-          </table>
-
-        </div>
-
-        <script>
-          document.getElementById("downloadPdf")
-            .addEventListener("click", () => window.print());
-
-          document.getElementById("closeTab")
-            .addEventListener("click", () => window.close());
-        </script>
-      </body>
-    </html>
-  `);
-
-  w.document.close();
+  setTimeout(() => URL.revokeObjectURL(url), 15000);
 }
+
 
 
 function escapeHtml(s) {
@@ -434,4 +317,107 @@ function parseCSV(text) {
   }
 
   return rows;
+}
+
+// CSV Report Payload Mapping
+const CSV_VALUE_MAP = {
+  job: {
+    admin: 0,
+    "blue-collar": 1,
+    entrepreneur: 2,
+    housemaid: 3,
+    management: 4,
+    retired: 5,
+    "self-employed": 6,
+    services: 7,
+    student: 8,
+    technician: 9,
+    unemployed: 10,
+    unknown: 11,
+  },
+  marital: {
+    divorced: 0, 
+    married: 1, 
+    single: 2 
+  },
+  education: { 
+    primary: 0, 
+    secondary: 1, 
+    tertiary: 2, 
+    unknown: 3 
+  },
+  contact: { 
+    cellular: 0, 
+    telephone: 1, 
+    unknown: 2 
+  },
+  housing: { 
+    no: 0, 
+    yes: 1 
+  },
+  default: { 
+    no: 0, 
+    yes: 1 
+  },
+  loan: { 
+    no: 0, 
+    yes: 1 
+  },
+  month: {
+    jan: 4, january: 4,
+    feb: 3, february: 3,
+    mar: 7, march: 7,
+    apr: 0, april: 0,
+    may: 8,
+    jun: 6, june: 6,
+    jul: 5, july: 5,
+    aug: 1, august: 1,
+    sep: 11, sept: 11, september: 11,
+    oct: 10, october: 10,
+    nov: 9, november: 9,
+    dec: 2, december: 2,
+  },
+  poutcome: { 
+    failure: 0, 
+    other: 1, 
+    success: 2, 
+    unknown: 3 
+  },
+};
+
+function norm(s) {
+  return String(s ?? "").trim().toLowerCase();
+}
+
+function toNumOrMap(key, value) {
+  const v = String(value ?? "").trim();
+  if (v === "") return null;
+  if (!Number.isNaN(Number(v))) return Number(v);
+
+  const map = CSV_VALUE_MAP[key];
+  if (!map) return null;
+
+  const k = norm(v);
+  return Object.prototype.hasOwnProperty.call(map, k) ? map[k] : null;
+}
+
+function csvRowToPayload(recordObj) {
+  return {
+    age: toNumOrMap("age", recordObj.age),
+    job: toNumOrMap("job", recordObj.job),
+    marital: toNumOrMap("marital", recordObj.marital),
+    education: toNumOrMap("education", recordObj.education),
+    default: toNumOrMap("default", recordObj.default),
+    balance: toNumOrMap("balance", recordObj.balance),
+    housing: toNumOrMap("housing", recordObj.housing),
+    loan: toNumOrMap("loan", recordObj.loan),
+    contact: toNumOrMap("contact", recordObj.contact),
+    day: toNumOrMap("day", recordObj.day),
+    month: toNumOrMap("month", recordObj.month),
+    duration: toNumOrMap("duration", recordObj.duration),
+    campaign: toNumOrMap("campaign", recordObj.campaign),
+    pdays: toNumOrMap("pdays", recordObj.pdays),
+    previous: toNumOrMap("previous", recordObj.previous),
+    poutcome: toNumOrMap("poutcome", recordObj.poutcome),
+  };
 }
