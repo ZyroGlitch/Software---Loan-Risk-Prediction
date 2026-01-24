@@ -25,13 +25,17 @@ body {
   color: white;
   font-weight: bold;
   font-size: 24px;
-  transition: filter 0.3s ease, text-shadow 0.3s ease;
+  transition:
+    filter 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .nav-logo:hover {
   filter: brightness(1.2);
-  text-shadow: 0 0 20px rgba(168, 85, 247, 0.8),
-    0 0 30px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.4);
+  text-shadow:
+    0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 30px rgba(168, 85, 247, 0.6),
+    0 0 40px rgba(168, 85, 247, 0.4);
 }
 .nav-logo-icon {
   font-size: 24px;
@@ -39,12 +43,16 @@ body {
   color: white;
   border-radius: 25%;
   padding: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .nav-logo:hover .nav-logo-icon {
   transform: rotate(15deg) scale(1.1);
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.6);
+  box-shadow:
+    0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 30px rgba(168, 85, 247, 0.6);
 }
 
 .nav-menu {
@@ -66,14 +74,18 @@ body {
   position: relative;
   display: inline-block;
   color: white;
-  transition: text-shadow 0.3s ease, transform 0.2s ease;
+  transition:
+    text-shadow 0.3s ease,
+    transform 0.2s ease;
 }
 
 .nav-link:hover {
   cursor: pointer;
   transform: translateY(-2px);
-  text-shadow: 0 0 15px rgba(168, 85, 247, 0.8),
-    0 0 25px rgba(168, 85, 247, 0.6), 0 0 35px rgba(168, 85, 247, 0.4);
+  text-shadow:
+    0 0 15px rgba(168, 85, 247, 0.8),
+    0 0 25px rgba(168, 85, 247, 0.6),
+    0 0 35px rgba(168, 85, 247, 0.4);
 }
 
 .nav-link::after {
@@ -103,12 +115,29 @@ body {
   background-color: #8a0ffcff;
   padding: 8px;
   border-radius: 10px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease,
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease,
     transform 0.3s ease;
 }
 .nav-link-icon:hover {
   background-color: #720ed0ff;
-  box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 30px rgba(168, 85, 247, 0.6),
+  box-shadow:
+    0 0 20px rgba(168, 85, 247, 0.8),
+    0 0 30px rgba(168, 85, 247, 0.6),
     0 0 40px rgba(168, 85, 247, 0.4);
   transform: translateY(-2px) scale(1.05);
+}
+
+@media (max-width: 1024) {
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 720px) {
+  .nav-menu {
+    display: none;
+  }
 }

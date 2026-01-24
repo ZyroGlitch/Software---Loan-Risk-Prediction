@@ -1,11 +1,11 @@
 <!-- get-started.html file -->
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Form Submission</title>
     <!-- <link rel="stylesheet" href="../css/index.css" />
     <link rel="stylesheet" href="../css/get-started.css" /> -->
 
@@ -337,10 +337,7 @@
               <div class="stats-grid">
                 <div class="stat-card stat-blue">
                   <div class="stat-label">Top Feature</div>
-                  <div
-                    class="stat-value-name"
-                    id="baselineTopFeatureName"
-                  ></div>
+                  <div class="stat-value" id="baselineTopFeatureName"></div>
                 </div>
                 <div class="stat-card stat-green">
                   <div class="stat-label">Top Contribution %</div>
@@ -383,10 +380,7 @@
               <div class="stats-grid">
                 <div class="stat-card stat-blue">
                   <div class="stat-label">Top Feature</div>
-                  <div
-                    class="stat-value-name"
-                    id="optimizedTopFeatureName"
-                  ></div>
+                  <div class="stat-value" id="optimizedTopFeatureName"></div>
                 </div>
                 <div class="stat-card stat-green">
                   <div class="stat-label">Top Contribution %</div>
@@ -465,11 +459,11 @@
   <script type="module" src="../js/get-started.js"></script>
   <script type="module" src="../js/handler/get-started-submit.js"></script> -->
 
-  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
   <script
     type="module"
     src="{{ url_for('static', filename='js/get-started.js') }}"
   ></script>
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
   <script
     type="module"
     src="{{ url_for('static', filename='js/handler/get-started-submit.js') }}"

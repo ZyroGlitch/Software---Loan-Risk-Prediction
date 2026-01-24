@@ -1,5 +1,5 @@
 main {
-  padding: 0rem 5rem;
+  padding: 0rem 1rem;
 }
 
 .function-container {
@@ -10,7 +10,7 @@ main {
 .function-title {
   color: white;
   font-weight: bold;
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1;
   margin-bottom: 0.5rem;
 }
@@ -22,33 +22,38 @@ main {
 .function-subtitle {
   color: white;
   letter-spacing: 0.1em;
-  font-size: 1.125rem;
+  font-size: 1rem;
   margin-top: 0.5rem;
 }
 
 .function-card {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1.25rem;
   margin-top: 1.25rem;
 }
 
 .step-card {
-  background: linear-gradient(135deg,
-      rgba(100, 59, 154, 0.1) 0%,
-      rgba(20, 20, 45, 0.9) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(100, 59, 154, 0.1) 0%,
+    rgba(20, 20, 45, 0.9) 100%
+  );
   backdrop-filter: blur(10px);
   min-height: 14rem;
   border-radius: 0.5rem;
-  padding: 2.5rem;
+  padding: 1rem;
   color: white;
   text-align: left;
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37),
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.37),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .step-card::before {
@@ -58,10 +63,12 @@ main {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
@@ -76,15 +83,18 @@ main {
   right: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle at center,
-      rgba(255, 255, 255, 0.05) 0%,
-      transparent 70%);
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
 .step-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 48px 0 rgba(100, 59, 154, 0.5),
+  box-shadow:
+    0 12px 48px 0 rgba(100, 59, 154, 0.5),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -107,6 +117,7 @@ main {
   color: #3b82f6;
   width: 24px;
   height: 24px;
+  display: none;
 }
 
 .step-title {
@@ -116,7 +127,7 @@ main {
 }
 
 .step-content {
-  padding-left: 6.75rem;
+  padding-left: 1rem;
 }
 
 .step-description {
@@ -140,4 +151,33 @@ main {
 
 .component-item {
   margin: 0.25rem 0;
+}
+
+@media (min-width: 1024px) {
+  .step-content {
+    padding-left: 6.75rem;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .step-icon {
+    display: block;
+  }
+  .step-card {
+    padding: 2.5rem;
+  }
+  .function-title {
+    font-size: 3rem;
+  }
+  .function-subtitle {
+    font-size: 1.25rem;
+  }
+  .function-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  main {
+    padding: 0rem 5rem;
+  }
 }

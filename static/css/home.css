@@ -184,6 +184,7 @@
   }
 
   .home-right {
+    display: grid;
     padding: 20px;
   }
 }
@@ -196,6 +197,9 @@
   .home-buttons {
     flex-direction: column;
     gap: 1rem;
+  }
+  .home-right {
+    display: none;
   }
 
   .btn {

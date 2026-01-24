@@ -1,12 +1,9 @@
-<!-- csv-reader.html -->
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CSV Reader</title>
-
     <!-- Load compiled CSS -->
     <link
       rel="stylesheet"
@@ -27,6 +24,12 @@
             <p class="subtitle">
               Import your dataset, review it, then run prediction.
             </p>
+            <a
+              class="subtitle"
+              href="{{ url_for('static', filename='template/csv_template.csv') }}"
+              download="Csv_Template.csv"
+              >Download CSV Template</a
+            >
           </div>
 
           <span class="badge">CSV Reader</span>
@@ -108,17 +111,7 @@
         </div>
       </div>
     </div>
-
-    <script src="{{ url_for('static', filename='js/handler/csv-reader-submit.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/get-started.js') }}"
-    ></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/handler/get-started-submit.js') }}"
-    ></script>
   </body>
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/handler/csv-reader-submit.js') }}"></script>
 </html>

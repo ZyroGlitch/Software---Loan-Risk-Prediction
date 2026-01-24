@@ -25,7 +25,8 @@ function loadLucideIcons(callback) {
 }
 
 function createNavBar() {
-  const currentPage = window.location.pathname.split("/").pop();
+  // const currentPage = window.location.pathname.split("/").pop();
+  const currentPage = window.location.pathname;
 
   const navHtml = `
     <nav class="nav-container">
@@ -48,7 +49,7 @@ function createNavBar() {
                 ${link.name}
               </a>
             </li>
-          `
+          `,
             )
             .join("")}
           <li class="nav-item">
