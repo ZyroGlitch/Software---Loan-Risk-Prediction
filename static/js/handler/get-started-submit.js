@@ -232,28 +232,24 @@ form.addEventListener("submit", async (e) => {
   openReportModal(); // Show report modal after prediction
 });
 
-function renderFeatureBars(containerId, items) {
+export function renderFeatureBars(containerId, items) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
   const rows = (items || []).map((x) => ({
     feature: x.feature,
     impact: Number(x.impact_percent ?? 0),
-    contribution: Number(x.contribution ?? 0),
+    contribution: Number(x.contribution ?? 0),  // Use actual contribution values here
   }));
-
-  const maxAbs = rows.reduce((m, x) => Math.max(m, Math.abs(x.contribution)), 0) || 1;
-
-  rows.forEach((x) => {
-    x.contributionPercent = (Math.abs(x.contribution) / maxAbs) * 100; // 0..100
-    x.sign = x.contribution >= 0 ? "+" : "−";
-  });
 
   container.innerHTML = "";
 
   rows.forEach((x, idx) => {
-    const impactPct = x.impact.toFixed(2);
-    const contribPct = x.contributionPercent.toFixed(2);
+    const impactPct = x.impact.toFixed(2);  // Impact stays the same, as percentage
+    const contribPct = x.contribution.toFixed(4);  // Display the actual contribution value (with sign)
+
+    // Calculate absolute contribution for the feature bar fill
+    const contribBarPct = Math.abs(x.contribution) * 500;  // Bar fill based on the absolute value of contribution
 
     const row = document.createElement("div");
     row.className = "feature-row";
@@ -277,10 +273,10 @@ function renderFeatureBars(containerId, items) {
       <div class="feature-bar-group">
         <div class="feature-bar-label">
           <span>Contribution</span>
-          <span class="contrib ${x.sign === "−" ? "neg" : "pos"}">${x.sign}${contribPct}%</span>
+          <span class="contrib ${x.contribution >= 0 ? "pos" : "neg"}">${x.contribution >= 0 ? "+" : ""}${contribPct}</span>  <!-- Display contribution as decimal -->
         </div>
         <div class="feature-bar">
-          <div class="feature-bar-fill" style="width:${contribPct}%;"></div>
+          <div class="feature-bar-fill" style="width:${contribBarPct}%"></div> <!-- Use absolute value for progress bar -->
         </div>
       </div>
     `;
@@ -288,6 +284,8 @@ function renderFeatureBars(containerId, items) {
     container.appendChild(row);
   });
 }
+
+
 
 function renderTopBottomFromImpact(items, topNameId, topPctId, lowNameId, lowPctId) {
   const arr = (items || [])
