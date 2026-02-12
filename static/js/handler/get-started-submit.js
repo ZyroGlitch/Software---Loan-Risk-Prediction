@@ -194,6 +194,16 @@ form.addEventListener("submit", async (e) => {
 
     document.getElementById("baseline-confidence").textContent =
       Number(data.baseline_model.confidence_score).toFixed(2) + "%";
+
+       // Change color based on loan status (Rejected or Approved)
+    const baselineStatus = data.baseline_model.loan_status;
+    const baselineStatusElem = document.getElementById("baseline-status");
+
+    if (baselineStatus === "Rejected") {
+      baselineStatusElem.style.color = "red";
+    } else {
+      baselineStatusElem.style.color = "lightgreen";
+    }
   }
 
   if (data.enhanced_model) {
@@ -205,6 +215,16 @@ form.addEventListener("submit", async (e) => {
 
     document.getElementById("enhanced-confidence").textContent =
       Number(data.enhanced_model.confidence_score).toFixed(2) + "%";
+
+       // Change color based on loan status (Rejected or Approved)
+    const enhancedStatus = data.enhanced_model.loan_status;
+    const enhancedStatusElem = document.getElementById("enhanced-status");
+
+    if (enhancedStatus === "Rejected") {
+      enhancedStatusElem.style.color = "red";
+    } else {
+      enhancedStatusElem.style.color = "lightgreen";
+    }
   }
 
   if (data.baseline_explainability?.items) {
