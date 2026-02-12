@@ -6,4 +6,5 @@ joblib
 xgboost
 shap
 reportlab
+gunicorn
 
