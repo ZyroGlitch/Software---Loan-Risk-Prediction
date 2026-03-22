@@ -64,7 +64,7 @@ baseline_model = None
 
 # Load enhanced model
 try:
-    artifact = joblib.load("model/enhanced_rf_artifact.pkl")
+    artifact = joblib.load("model/enhanced_rf_artifact_v2.pkl")
 
     rf_feature_model = artifact.get("rf_feature_model")
     rf_best = artifact["rf_best"]
@@ -81,7 +81,7 @@ except Exception as e:
 
 # Load baseline model (ALWAYS)
 try:
-    baseline_artifact = joblib.load("model/baseline_rf_artifact.pkl")
+    baseline_artifact = joblib.load("model/baseline_rf_artifact_v2.pkl")
     baseline_model = baseline_artifact["rf_baseline_model"]
 
     # Use same feature order
