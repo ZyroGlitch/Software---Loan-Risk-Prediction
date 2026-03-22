@@ -64,7 +64,7 @@ baseline_model = None
 
 # Load enhanced model
 try:
-    artifact = joblib.load("model/enhanced_rf_artifact_v2.pkl")
+    artifact = joblib.load("model/enhanced_rf_artifact_v6.pkl")
 
     rf_feature_model = artifact.get("rf_feature_model")
     rf_best = artifact["rf_best"]
