@@ -258,6 +258,12 @@ def _impact_to_100(items):
     return items
 
 
+def _confidence_score(probability):
+    # Confidence is decision certainty, not the raw positive-class probability.
+    # This keeps confidence distinct from risk for rejected cases.
+    return round(abs(float(probability) - 0.5) * 200, 2)
+
+
 _init_explainers()
 
 
@@ -424,7 +430,7 @@ def _run_inference_and_explain(data):
             "risk_percentage": round((100 - (final_prob * 100)), 2),
             "rf_probability": round(rf_prob * 100, 2),
             "xgb_probability": round(xgb_prob * 100, 2),
-            "confidence_score": round(max(final_prob, 1 - final_prob) * 100, 2),
+            "confidence_score": _confidence_score(final_prob),
             "model_type": "enhanced_blend"
         }
 
@@ -436,7 +442,7 @@ def _run_inference_and_explain(data):
             "loan_status": "Approved" if baseline_pred else "Rejected",
             "risk_percentage": round((100 - (baseline_prob * 100)), 2),
             "rf_probability": round(baseline_prob * 100, 2),
-            "confidence_score": round(max(baseline_prob, 1 - baseline_prob) * 100, 2),
+            "confidence_score": _confidence_score(baseline_prob),
             "model_type": "baseline_rf"
         }
 
@@ -876,7 +882,7 @@ def predict():
                 "risk_percentage": round((100 - (final_prob * 100)), 2),
                 "rf_probability": round(rf_prob * 100, 2),
                 "xgb_probability": round(xgb_prob * 100, 2),
-                "confidence_score": round(max(final_prob, 1 - final_prob) * 100, 2),
+                "confidence_score": _confidence_score(final_prob),
                 "model_type": "enhanced_blend"
             }
 
@@ -889,7 +895,7 @@ def predict():
                 "loan_status": "Approved" if baseline_pred else "Rejected",
                 "risk_percentage": round((100 - (baseline_prob * 100)), 2),
                 "rf_probability": round(baseline_prob * 100, 2),
-                "confidence_score": round(max(baseline_prob, 1 - baseline_prob) * 100, 2),
+                "confidence_score": _confidence_score(baseline_prob),
                 "model_type": "baseline_rf"
             }
 
