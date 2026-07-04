@@ -1,7 +1,7 @@
 // Configuration for the navigation bar
 const navConfig = {
   website: {
-    name: "Loan Risk Prediction",
+    name: "Loan Acceptance Prediction",
     url: "/home",
   },
   links: [
